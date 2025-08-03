@@ -134,3 +134,183 @@ This line prints the message `"Hello, World!"` to the console.
 |`public static void main(String[] args)`|Defines the entry point of the program|
 |`System.out.println("Hello, World!");`|Prints the message to the screen with a newline|
 |`{` and `}`|Define the beginning and end of class and method blocks|
+
+## More
+
+### **1. More on Access Modifiers**
+
+Access modifiers control **who can see or use** a class, method, or variable.
+
+|Modifier|Where it can be accessed from|
+|---|---|
+|`public`|From **anywhere** (other packages, files, classes)|
+|`private`|Only from **within the same class**|
+|`protected`|From the **same package** and subclasses (even outside)|
+|_no modifier_|(called _package-private_) — from **same package only**|
+
+> 🔹 Use `public` when others **need access**.  
+> 🔹 Use `private` when you want to **hide details**.
+
+---
+
+### **2. What if no access modifier is used?**
+
+That’s called **default access** or **package-private**.
+
+- The class/member will only be accessible to other classes **within the same package**.
+    
+- It’s **less open** than `public`, but **more open** than `private`.
+    
+
+Example:
+
+```java
+class MyClass { }  // Not public → can only be used inside the same package
+```
+
+---
+
+### **3. Can a method belong to an object?**
+
+✅ **Yes.**
+
+- Methods that are **not marked `static`** belong to an **object (instance)** of the class.
+    
+- You need to **create an object** to use them.
+    
+
+Example:
+
+```java
+class Dog {
+    void bark() {
+        System.out.println("Woof!");
+    }
+}
+
+Dog d = new Dog();  // d is an object
+d.bark();           // object method call
+```
+
+> 🔹 `static` methods belong to the **class itself**.  
+> 🔹 Non-static methods belong to **objects (instances)**.
+
+---
+
+### **4. So even though `main` is inside a class, it doesn't need an instance?**
+
+✅ **Correct!**
+
+- Because `main` is marked `static`, it belongs to the **class**, not an object.
+    
+- The Java Virtual Machine (JVM) can run it directly without creating an instance.
+    
+
+> 🔹 That’s why we say:  
+> “Static means no object needed.”
+
+---
+
+### **5. The `main` method is the only thing in the program. What is the `String[] args` it's accepting?**
+
+- It’s a way to **receive input from the command line**.
+    
+- `args` is an **array of Strings** — it holds any text passed when you run the program.
+    
+
+Example:
+
+```bash
+java HelloWorld apple banana
+```
+
+Inside your Java code:
+
+- `args[0]` is `"apple"`
+    
+- `args[1]` is `"banana"`
+    
+
+If you don’t pass anything, `args.length == 0`
+
+> 🔹 You **don’t have to use** it, but it must be there (by convention).
+
+---
+
+### **6. Can I remove `String[] args` and keep brackets empty?**
+
+❌ **No, not recommended.**
+
+- The JVM expects the exact signature:
+    
+    ```java
+    public static void main(String[] args)
+    ```
+    
+
+If you write:
+
+```java
+public static void main() { ... }
+```
+
+It compiles, but **won’t run** as the starting point — you’ll get an error like:
+
+> `Main method not found in class HelloWorld`
+
+> ✅ You can ignore `args` inside the method, but **don't remove it**.
+
+---
+
+### **7. What is a "member"?**
+
+A **member** is **anything declared inside a class**.
+
+This includes:
+
+- **Fields** (variables inside the class)
+    
+- **Methods**
+    
+- **Constructors**
+    
+- **Nested classes**
+    
+
+Example:
+
+```java
+class Car {
+    int speed;         // member variable (field)
+    void drive() { }   // member method
+}
+```
+
+---
+
+### **8. So is object, member, and instance one and the same?**
+
+❌ **No — they are related but different:**
+
+|Term|Meaning|
+|---|---|
+|**Class**|A blueprint for creating objects.|
+|**Object**|A real thing made from a class (like a car built from a blueprint).|
+|**Instance**|Another word for object — interchangeable in most contexts.|
+|**Member**|Anything declared inside a class (field, method, etc).|
+
+Example:
+
+```java
+class Car {
+    int speed;        // member
+    void drive() {}   // member
+}
+
+Car myCar = new Car();  // myCar is an object (or instance)
+```
+
+> ✅ You create **instances (objects)** of a class, which contain **members**.
+
+---
+
