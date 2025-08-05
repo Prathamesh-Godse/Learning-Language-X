@@ -314,3 +314,195 @@ Car myCar = new Car();  // myCar is an object (or instance)
 
 ---
 
+### **9. Why are `private` and `protected` confusing? Let’s clarify them.**
+
+#### 🔒 `private`
+
+- **Accessible only within the same class**.
+    
+- Think of it as **"My eyes only"** — no one else can see it, not even subclasses or classes in the same package.
+    
+
+```java
+class Animal {
+    private String name = "Dog";
+
+    private void speak() {
+        System.out.println("Bark");
+    }
+}
+```
+
+You **cannot access** `name` or `speak()` from outside the `Animal` class.
+
+---
+
+#### 🛡️ `protected`
+
+- **Accessible within the same package** **and** **in subclasses (even if they’re in different packages)**.
+    
+- Think of it as **"Family and subclasses only"**.
+    
+
+```java
+package animals;
+
+public class Animal {
+    protected void makeSound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+```java
+package zoo;
+import animals.Animal;
+
+public class Dog extends Animal {
+    void bark() {
+        makeSound(); // ✅ allowed because it's a subclass
+    }
+}
+```
+
+---
+
+### **10. What is Package-Private (Default Access)?**
+
+- **When no modifier is used**, Java uses **package-private** access by default.
+    
+- It means: **Accessible only within the same package.**
+    
+- Not accessible from a different package, **even if it’s a subclass**.
+    
+
+```java
+class Animal {
+    void sleep() {
+        System.out.println("Sleeping"); // package-private
+    }
+}
+```
+
+Other classes **in the same package** can use `sleep()`, but not those in other packages.
+
+---
+
+### **11. What are Fields, Methods, Constructors, and Nested Classes?**
+
+#### 🧱 Fields
+
+- Variables declared inside a class (but outside any method).
+    
+- Represent the **state/data** of an object.
+    
+
+```java
+class Car {
+    String color = "Red"; // Field
+}
+```
+
+---
+
+#### 🧠 Methods
+
+- Code blocks that define behavior.
+    
+- Operate on the object’s data (fields).
+    
+
+```java
+void drive() { // Method
+    System.out.println("Driving");
+}
+```
+
+---
+
+#### 🏗️ Constructors
+
+- Special methods used to **initialize** new objects.
+    
+- Same name as the class.
+    
+- No return type.
+    
+
+```java
+class Car {
+    Car() {
+        System.out.println("Car created");
+    }
+}
+```
+
+---
+
+#### 📦 Nested Classes
+
+- Classes defined **within another class**.
+    
+- Useful for grouping related logic.
+    
+
+```java
+class Outer {
+    class Inner {
+        void show() {
+            System.out.println("Inner class");
+        }
+    }
+}
+```
+
+---
+
+### **12. Difference between Object and Instance**
+
+- 🔹 **Instance**: The actual **runtime version** of a class.
+    
+- 🔹 **Object**: Technically the **same thing**, but more generally used to refer to anything created from a class.
+    
+
+```java
+Car myCar = new Car(); 
+// myCar is both an object and an instance of Car
+```
+
+> Think of:
+> 
+> - `Class` → Blueprint
+>     
+> - `Object`/`Instance` → House built from the blueprint
+>     
+
+🔸 **"Object" is the more general term**, whereas **"instance" is more often used when referring to a specific variable created from a class.**
+
+---
+
+### **13. So Java doesn't have functions?**
+
+Correct — **Java does not have _free-standing_ functions** like in C or Python.
+
+- **All functions must be inside a class**, and are called **methods**.
+    
+- Java is a **pure object-oriented language** (except for primitive types), so **everything lives in a class**.
+    
+
+```java
+class Utility {
+    static void printHello() {
+        System.out.println("Hello");
+    }
+}
+```
+
+You **cannot** write a function like this in Java:
+
+```java
+// ❌ Not allowed in Java
+void sayHi() {
+    System.out.println("Hi");
+}
+```
